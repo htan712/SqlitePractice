@@ -13,7 +13,7 @@ App.select(:category).distinct
 
 top_paid = sql.performQuery("SELECT * FROM apps WHERE price > 5 ORDER BY download DESC")
 
-App.where(price > 5).order(download: :desc)
+App.where('price > 5').order(download: :desc)
 
 # sort records in a particular order
 
@@ -49,7 +49,7 @@ actors: id: Integer, name: Text, movie_id: Text
 
 cross_join = sql.performQuery("SELECT actors.name, movies.name FROM movies, actors")
 
-Actors.select("actors.name, movies.name").joins("FULL JOIN movies on actors.movie_id = movies.id")
+Actors.select("actors.name, movies.name").joins("CROSS JOIN movies on actors.movie_id = movies.id")
 
 inner_join = sql.performQuery("SELECT actors.name as ActorName, movies.name as MovieName FROM movies JOIN actors ON actors.movie_id = movies.id")
 
